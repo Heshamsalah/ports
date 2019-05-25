@@ -6,22 +6,22 @@ class PortsController < ApplicationController
 
   def show
     outcome = ShowPortMutation.run!(port_params)
-    mutation_response(outcome[:result], PortSerializer, :ok)
+    mutation_response(outcome, PortSerializer, :ok)
   end
 
   def create
     outcome = CreatePortMutation.run!(port_params)
-    mutation_response(outcome[:result], PortSerializer, :created)
+    mutation_response(outcome, PortSerializer, :created)
   end
 
   def update
     outcome = UpdatePortMutation.run!(port_params)
-    mutation_response(outcome[:result], PortSerializer, :ok)
+    mutation_response(outcome, PortSerializer, :ok)
   end
 
   def destroy
     outcome = DeletePortMutation.run!(port_params)
-    mutation_response(outcome[:result], PortSerializer, :ok)
+    mutation_response(outcome, PortSerializer, :ok)
   end
 
   private
