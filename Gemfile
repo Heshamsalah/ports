@@ -31,6 +31,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Ruby library that pretty prints Ruby objects in full color
 gem 'awesome_print'
 
+# A lightning fast JSON:API serializer for Ruby Objects.
+gem 'fast_jsonapi'
+
+# Compose your business logic into commands that sanitize and validate input
+gem 'mutations'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

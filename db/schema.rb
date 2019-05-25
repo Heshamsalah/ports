@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 2019_05_25_014729) do
     t.string "name"
     t.string "code"
     t.string "city"
-    t.string "oceans_insight_code"
-    t.decimal "lat", precision: 10, scale: 6
-    t.decimal "lng", precision: 10, scale: 6
+    t.string "oceans_insights_code"
+    t.decimal "lat", precision: 20, scale: 16
+    t.decimal "lng", precision: 20, scale: 16
     t.string "big_schedules"
     t.string "port_type"
     t.boolean "port_hub", default: false
-    t.string "oceans_insights"
+    t.string "ocean_insights"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_ports_on_code", unique: true
