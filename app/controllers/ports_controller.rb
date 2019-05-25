@@ -1,7 +1,7 @@
 class PortsController < ApplicationController
   def index
     outcome = IndexPortsMutation.run!(port_params)
-    mutation_response(outcome[:result], PortSerializer, :ok)
+    mutation_response(outcome, PortSerializer, :ok)
   end
 
   def show
@@ -19,7 +19,7 @@ class PortsController < ApplicationController
     mutation_response(outcome[:result], PortSerializer, :ok)
   end
 
-  def delete
+  def destroy
     outcome = DeletePortMutation.run!(port_params)
     mutation_response(outcome[:result], PortSerializer, :ok)
   end
@@ -28,8 +28,8 @@ class PortsController < ApplicationController
 
   def port_params
     params.permit(
-      :per, :page, :id, :name, :code, :city, :oceans_insight_code, :latitude,
-      :longitude, :big_schedules, :port_type, :port_hub, :oceans_insight,
+      :per, :page, :id, :name, :code, :city, :oceans_insights_code, :latitude,
+      :longitude, :big_schedules, :port_type, :port_hub, :ocean_insight,
       :ports_csv_file
     )
   end
