@@ -30,7 +30,7 @@ class PortsController < ApplicationController
     params.permit(
       :per, :page, :id, :name, :code, :city, :oceans_insights_code, :latitude,
       :longitude, :big_schedules, :port_type, :port_hub, :ocean_insight,
-      :ports_csv_file
+      :ports_csv_file, :lat, :lng
     )
   end
 end

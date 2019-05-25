@@ -11,9 +11,11 @@ class IndexPortsMutation < Mutations::Command
     string :lng
     string :oceans_insights_code
     string :ocean_insights
+    integer :page, default: 1
+    integer :per, default: 10
   end
 
   def execute
-    Port.all
+    Port.page(inputs[:page]).per(inputs[:per])
   end
 end

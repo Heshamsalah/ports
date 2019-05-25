@@ -4,8 +4,12 @@ RSpec.describe IndexPortsMutation, type: :mutation do
   let!(:ports) { create_list(:port, 50) }
 
   it 'should retrieve ports successfully' do
-    outcome = IndexPortsMutation.run
+    params = {
+      page: 1,
+      per: 20
+    }
+    outcome = IndexPortsMutation.run(params)
 
-    expect(outcome.result.count).to eq(ports.count)
+    expect(outcome.result.count).to eq(params[:per])
   end
 end

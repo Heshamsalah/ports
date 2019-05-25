@@ -3,10 +3,18 @@ require 'rails_helper'
 RSpec.describe 'Ports API', type: :request do
   context 'GET /ports' do
     let!(:ports) { create_list(:port, 50) }
-    it 'should retrieve ports successfully' do
+    it 'should retrieve paginated ports successfully' do
+      get ports_url, params: { page: 1, per: 20 }
+
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)['data'].count).to eq(20)
+    end
+
+    it 'should retrieve only 10 ports when page and/or per is not provided' do
       get ports_url
 
       expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)['data'].count).to eq(10)
     end
   end
 
