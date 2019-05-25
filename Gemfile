@@ -6,7 +6,7 @@ ruby '2.5.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg', '~> 1.1', '>= 1.1.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -28,9 +28,29 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Ruby library that pretty prints Ruby objects in full color
+gem 'awesome_print'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
+  # Using RSpec for testing.
+  gem 'rspec-rails', '~> 3.5'
+  # A fixtures replacement with a more straightforward syntax.
+  gem 'factory_bot_rails', '~> 4.0'
+  # A library for generating fake data.
+  gem 'faker'
+end
+
+group :test do
+  # Provides RSpec with additional matchers.
+  gem 'shoulda-matchers', '~> 3.1'
+  # Cleans test database to ensure a clean state in each test suite.
+  gem 'database_cleaner'
+  # Test code coverage for Ruby
+  gem 'simplecov', require: false
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
