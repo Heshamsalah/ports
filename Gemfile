@@ -32,6 +32,22 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
+  # Using RSpec for testing.
+  gem 'rspec-rails', '~> 3.5'
+  # A fixtures replacement with a more straightforward syntax.
+  gem 'factory_bot_rails', '~> 4.0'
+  # A library for generating fake data.
+  gem 'faker'
+end
+
+group :test do
+  # Provides RSpec with additional matchers.
+  gem 'shoulda-matchers', '~> 3.1'
+  # Cleans test database to ensure a clean state in each test suite.
+  gem 'database_cleaner'
+  # Test code coverage for Ruby
+  gem 'simplecov', require: false
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
