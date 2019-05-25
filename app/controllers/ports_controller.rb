@@ -24,13 +24,18 @@ class PortsController < ApplicationController
     mutation_response(outcome, PortSerializer, :ok)
   end
 
+  def create_from_csv
+    outcome = CreatePortsFromCsvMutation.run!(port_params)
+    mutation_response(outcome, PortSerializer, :ok)
+  end
+
   private
 
   def port_params
     params.permit(
       :per, :page, :id, :name, :code, :city, :oceans_insights_code, :latitude,
       :longitude, :big_schedules, :port_type, :port_hub, :ocean_insight,
-      :ports_csv_file, :lat, :lng
+      :csv_string, :lat, :lng
     )
   end
 end

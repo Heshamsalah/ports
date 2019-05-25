@@ -14,7 +14,6 @@ RSpec.describe Port, type: :model do
       it { is_expected.to validate_presence_of(:lng) }
       it { is_expected.to validate_presence_of(:lat) }
       it { is_expected.to validate_presence_of(:port_type) }
-      it { is_expected.to validate_presence_of(:port_hub) }
     end
 
     context 'numericality' do
