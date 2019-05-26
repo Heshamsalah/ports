@@ -1,19 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Ports API', type: :request do
+  let!(:user) { create(:user) }
+  let(:header) { { Authorization: user.token } }
+
   context 'GET /ports' do
     let!(:ports) { create_list(:port, 50) }
     let(:port) { ports.last }
 
     it 'should retrieve paginated ports successfully' do
-      get ports_url, params: { page: 1, per: 20 }
+      get ports_url, params: { page: 1, per: 20 }, headers: header
 
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['data'].count).to eq(20)
     end
 
     it 'should retrieve only 10 ports when page and/or per is not provided' do
-      get ports_url
+      get ports_url, headers: header
 
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['data'].count).to eq(10)
@@ -24,7 +27,8 @@ RSpec.describe 'Ports API', type: :request do
         page: 1,
         per: 50
       }
-      get ports_url, params: params.merge(port.attributes).except(:id)
+      get ports_url, params: params.merge(port.attributes).except(:id),
+                     headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data']
@@ -39,7 +43,7 @@ RSpec.describe 'Ports API', type: :request do
     let!(:port) { ports.first }
 
     it 'should get port by id' do
-      get port_url(id: port.id)
+      get port_url(id: port.id), headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data'].symbolize_keys
@@ -53,7 +57,7 @@ RSpec.describe 'Ports API', type: :request do
     let(:params) { attributes_for(:port) }
 
     it 'should create port successfully' do
-      post ports_url, params: params
+      post ports_url, params: params, headers: header
 
       expect(response).to have_http_status(:created)
       obj = JSON.parse(response.body)['data'].deep_symbolize_keys
@@ -68,7 +72,7 @@ RSpec.describe 'Ports API', type: :request do
 
     it 'should update port successfully' do
       port = ports.last
-      put port_url(id: port.id), params: params
+      put port_url(id: port.id), params: params, headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data'].deep_symbolize_keys
@@ -83,7 +87,7 @@ RSpec.describe 'Ports API', type: :request do
     let!(:ports) { create_list(:port, 5) }
     it 'should delete port successfully' do
       port = ports.last
-      delete port_url(id: port.id)
+      delete port_url(id: port.id), headers: header
 
       expect(response).to have_http_status(:ok)
     end
@@ -97,7 +101,8 @@ RSpec.describe 'Ports API', type: :request do
 
     it "should create ports from 'airports.csv' file" do
       airports_csv_string = Base64.encode64(airports_csv.read)
-      post batch_create_csv_url, params: { csv_string: airports_csv_string }
+      post batch_create_csv_url, params: { csv_string: airports_csv_string },
+                                 headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data']
@@ -108,7 +113,8 @@ RSpec.describe 'Ports API', type: :request do
 
     it "should create ports from 'airports.csv' file" do
       mixed_csv_string = Base64.encode64(mixed_csv.read)
-      post batch_create_csv_url, params: { csv_string: mixed_csv_string }
+      post batch_create_csv_url, params: { csv_string: mixed_csv_string },
+                                 headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data']
@@ -119,7 +125,8 @@ RSpec.describe 'Ports API', type: :request do
 
     it "should create ports from 'airports.csv' file" do
       seaports_csv_string = Base64.encode64(seaports_csv.read)
-      post batch_create_csv_url, params: { csv_string: seaports_csv_string }
+      post batch_create_csv_url, params: { csv_string: seaports_csv_string },
+                                 headers: header
 
       expect(response).to have_http_status(:ok)
       obj = JSON.parse(response.body)['data']
