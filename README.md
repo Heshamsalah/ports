@@ -13,6 +13,8 @@ create batch ports at once from a CSV file
 - `$ rails db:create`
 - `$ rails db:migrate`
 - `$ rails s`
+
+### Postman
 - use `Postman` app to interact with the api. You can use this collection: `https://www.getpostman.com/collections/e615e6910ae51e6dc92c`
 
 ### Steps and App Usage Explaination
@@ -66,3 +68,15 @@ create batch ports at once from a CSV file
 
 ### Running Tests
 - Run tests using: `$ rspec`
+
+### Rake Tasks
+
+- `rake create_demo_data`
+  - this rake task will generate and puts in the console: 
+    1- User with email and password
+    2- '3' newly created port records
+    3- Base64 encoded string of a small test csv file.
+
+- `rake convert_csv_to_base64'[/path/to/file]'`
+  - this rake task is for converting any csv file into base64 string.
+  - it will put out a base64 string of the file in console.
