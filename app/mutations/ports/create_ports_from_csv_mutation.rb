@@ -3,10 +3,12 @@ class CreatePortsFromCsvMutation < Mutations::Command
     string :csv_string
   end
 
+  # This should be handled by background job handler like DelayedJobs or sidekiq
+  # its like that now for the sake of simplicity.
   def execute
     csv = CsvHandler.new(csv_string)
     ports = []
-    faild = []
+    faild = [] # This variable catchs failed attempts to create ports
 
     csv.rows.each do |row|
       ports << CreatePortMutation.run!(create_port_params(row))
@@ -14,6 +16,9 @@ class CreatePortsFromCsvMutation < Mutations::Command
       faild << { resource: row, error: e.message }
     end
 
+    # This Serevice (Mutation) might neet to return a custom object instead
+    # to have both successfuly created ports and also the failed ones
+    # might look something like that { success: ports, failure: faild }
     ports
   end
 
@@ -27,10 +32,10 @@ class CreatePortsFromCsvMutation < Mutations::Command
       lat: data_row[:latitude],
       lng: data_row[:longitude],
       port_type: data_row[:port_type],
-      port_hub: data_row[:port_hub],
+      port_hub: data_row[:port_hub] == 'true',
       oceans_insights_code: data_row[:oceans_insights_code],
       ocean_insights: data_row[:ocean_insights],
       big_schedules: data_row[:big_schedules]
-    }.delete_if { |_, v| v.blank? && v != false }
+    }.delete_if { |_, v| v.nil? }
   end
 end

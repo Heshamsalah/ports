@@ -88,4 +88,44 @@ RSpec.describe 'Ports API', type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  ##############################################################################
+  context 'POST /ports/batch_create_csv' do
+    let(:airports_csv) { fixture_file_upload('/files/airports.csv') }
+    let(:mixed_csv) { fixture_file_upload('/files/mixed.csv') }
+    let(:seaports_csv) { fixture_file_upload('/files/seaports.csv') }
+
+    it "should create ports from 'airports.csv' file" do
+      airports_csv_string = Base64.encode64(airports_csv.read)
+      post batch_create_csv_url, params: { csv_string: airports_csv_string }
+
+      expect(response).to have_http_status(:ok)
+      obj = JSON.parse(response.body)['data']
+      expect(obj.count).to be > 0
+      expect(obj.first.deep_symbolize_keys[:attributes])
+        .to have_key(:oceans_insights_code)
+    end
+
+    it "should create ports from 'airports.csv' file" do
+      mixed_csv_string = Base64.encode64(mixed_csv.read)
+      post batch_create_csv_url, params: { csv_string: mixed_csv_string }
+
+      expect(response).to have_http_status(:ok)
+      obj = JSON.parse(response.body)['data']
+      expect(obj.count).to be > 0
+      expect(obj.first.deep_symbolize_keys[:attributes])
+        .to have_key(:oceans_insights_code)
+    end
+
+    it "should create ports from 'airports.csv' file" do
+      seaports_csv_string = Base64.encode64(seaports_csv.read)
+      post batch_create_csv_url, params: { csv_string: seaports_csv_string }
+
+      expect(response).to have_http_status(:ok)
+      obj = JSON.parse(response.body)['data']
+      expect(obj.count).to be > 0
+      expect(obj.first.deep_symbolize_keys[:attributes])
+        .to have_key(:oceans_insights_code)
+    end
+  end
 end

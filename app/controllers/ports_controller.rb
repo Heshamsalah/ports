@@ -24,6 +24,9 @@ class PortsController < ApplicationController
     mutation_response(outcome, PortSerializer, :ok)
   end
 
+  # This custom action lets api users submit a base64 encoded csv file to batch
+  # create ports at once.
+  # It depends on the 'csv_string' param permitted in the ports_params method
   def create_from_csv
     outcome = CreatePortsFromCsvMutation.run!(port_params)
     mutation_response(outcome, PortSerializer, :ok)

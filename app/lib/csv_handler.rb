@@ -18,7 +18,4 @@ class CsvHandler
   def rows
     @csv_rows
   end
-
-  def headers
-  end
 end
