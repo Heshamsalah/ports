@@ -17,6 +17,7 @@ create batch ports at once from a CSV file
 ### Postman
 - use `Postman` app to interact with the api.
   - You can use this collection: `https://www.getpostman.com/collections/e615e6910ae51e6dc92c`
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e615e6910ae51e6dc92c)
 
 ### Steps and App Usage Explaination
 - To perform actions in this application you need to be an authorized user
