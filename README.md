@@ -4,8 +4,6 @@
 An API which allows you to manage ports with CRUD operations and also you can
 create batch ports at once from a CSV file
 
-* There is an issue with circle ci config right now [To be fixed]
-
 ### Setting up the project
 - clone the repo: `git clone git@github.com:Heshamsalah/ports.git`
 - `$ cd ports`
