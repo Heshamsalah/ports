@@ -6,15 +6,15 @@ create batch ports at once from a CSV file
 
 ### Setting up the project
 - clone the repo: `git clone git@github.com:Heshamsalah/ports.git`
-- `$ cd ports`
-- `$ bundle install`
-- `$ rails db:create`
-- `$ rails db:migrate`
-- `$ rails s`
+- Goto `ports` directory `cd ports`.
+- Run `bundle install`.
+- Change Database related [Evnironment Variables] in the `.env` file to match your PostgreSQL Database configuration.
+- Run `rails db:create && rails db:migrate`.
+- Start rails server using: `rails s`.
 
 ### Postman
-- use `Postman` app to interact with the api.
-  - You can use this collection: `https://www.getpostman.com/collections/e615e6910ae51e6dc92c`
+- Use [Postman](https://www.getpostman.com/) app to interact with the `deployed` [api](https://hsalah.net/ports_app).
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e615e6910ae51e6dc92c)
 
 ### Steps and App Usage Explaination
@@ -67,10 +67,10 @@ create batch ports at once from a CSV file
 - You can provide search params to the `index` action to search by any of the `port`'s fields.
 
 ### Running Tests
-- Run tests using: `$ rspec`
+- Tests run automatically on `master` branch using [CircleCI](https://circleci.com/).
+- Run tests locally using: `rspec`
 
 ### Rake Tasks
-
 - `rake create_demo_data`
   - this rake task will generate and puts in the console: 
     - User with email and password
