@@ -81,3 +81,16 @@ create batch ports at once from a CSV file
 - `rake convert_csv_to_base64'[/path/to/file]'`
   - this rake task is for converting any csv file into base64 string.
   - it will put out a base64 string of the file in console.
+
+### Used Gems:
+* [RSpec](https://relishapp.com/rspec)
+* [Faker](https://github.com/stympy/faker)
+* [Database Cleaner](https://github.com/DatabaseCleaner/database_cleaner)
+* [FactoryBot](https://github.com/thoughtbot/factory_bot)
+* [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers)
+* [Awesone Print](https://github.com/awesome-print/awesome_print)
+* [Mutations](https://github.com/cypriss/mutations)
+* [SimpleCov](https://github.com/colszowka/simplecov/)
+* [Kaminari](https://github.com/kaminari/kaminari)
+* [FastJSON:API](https://github.com/Netflix/fast_jsonapi)
+* [Ransack](https://github.com/activerecord-hackery/ransack)
