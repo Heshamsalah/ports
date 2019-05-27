@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
         @current_user = user
       else
         msg = 'You are not authorized to perform this action!'
-        render json: { errors: msg }, status: :unauthorized
+        raise StandardError, msg
       end
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
