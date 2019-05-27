@@ -30,12 +30,12 @@ class SessionsController < ActionController::API
 
   def generate_token(user)
     token = JsonWebToken.encode(user_id: user.id)
-    time = Time.now + 24.hours.to_i
+    time = Time.now
 
     user.update_attributes!(
       token: token,
-      token_created_at: Time.now,
-      token_expires_at: time
+      token_created_at: time,
+      token_expires_at: time + 24.hours.to_i
     )
     { token: user.token, exp: time.strftime("%m-%d-%Y %H:%M") }
   end
